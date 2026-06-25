@@ -34,6 +34,16 @@ impl Node<>{
       }
 
 }
+
+impl Clone for Node {
+    // creates a new copy of a node, it's a different node
+    fn clone(&self) -> Self{
+        Self{
+            val: self.val.clone(), // deep copy of the val
+            next: self.next.clone(), // shallow copy of the next pointer
+        }
+    }
+}
 pub struct LinkeddList {
     head: Node,
     tail: Node,
@@ -41,33 +51,22 @@ pub struct LinkeddList {
     capacity: u32
 }
 impl LinkeddList<> {
-    // fn new(_head:Node, _tail:Node) -> Self{
-    //     // constructor that takes in a head and a tail and returns a linked list
-    //     Self {
-    //         head: _head,
-    //         tail: _tail,
-    //         size: 1,
-    //         capacity: 1,
-    //     }
-    // }
+     fn new(_head:Node, _tail:Node) -> Self{
+         // constructor that takes in a head and a tail and returns a linked list
+         Self {
+             head: _head,
+             tail: _tail,
+             size: 1,
+             capacity: 1,
+         }
+     }
 }
+// Rc handle ──► [ strong_count | weak_count | RefCell { borrow_flag | Node { val, next } } ]
+
 fn main() {
-    // the below is a mock manually created linked list
-    let mut mock_head = Node::new(Option::from(Box::new(9)));
-    let mut mock_tail = Node::new(Option::from(Box::new(19)));
 
-    let node_pointer_1 = Option::from(Rc::new(RefCell::new(mock_head))); // moves the value of mock_head into the Rc
-    let node_pointer_2 = Option::from(Rc::new(RefCell::new(mock_tail)));
-
-    match &node_pointer_1 {
-        Some(node) => {
-            node.borrow_mut().next = node_pointer_2;
-        },
-        None => {
-            println!("Node is None");
-        }
-    }
     
-    println!("{:?}",node_pointer_1.clone().unwrap().borrow_mut().val);
-    println!("{:?}",node_pointer_1.clone().unwrap().borrow_mut().val);
+    
+    // println!("{:?}",mock_head.val);
+    // println!("{:?}",node_pointer_2.clone().unwrap().borrow_mut().val);
 }
