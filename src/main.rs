@@ -65,7 +65,7 @@ impl LinkeddList<> {
 
 fn main() {
 
-    
+
     
     // println!("{:?}",mock_head.val);
     // println!("{:?}",node_pointer_2.clone().unwrap().borrow_mut().val);
